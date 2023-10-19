@@ -21,6 +21,7 @@ php artisan storage:link
 torch database/database.sqlite
 php artisan migrate
 php artisan serve
+php artisan make:filament-user
 ```
 
 ## License
