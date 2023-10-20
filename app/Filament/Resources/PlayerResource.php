@@ -82,4 +82,9 @@ class PlayerResource extends Resource
             'edit' => Pages\EditPlayer::route('/{record}/edit'),
         ];
     }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::$model::count();
+    }
 }

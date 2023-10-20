@@ -107,4 +107,9 @@ class RecordResource extends Resource
             'edit' => Pages\EditRecord::route('/{record}/edit'),
         ];
     }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::$model::count();
+    }
 }
