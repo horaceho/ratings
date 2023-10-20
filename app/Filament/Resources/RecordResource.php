@@ -24,6 +24,9 @@ class RecordResource extends Resource
         return $form
             ->schema([
                 Forms\Components\DatePicker::make('date')
+                    ->native(false)
+                    ->format('Y-m-d')
+                    ->displayFormat('Y-m-d')
                     ->required(),
                 Forms\Components\TextInput::make('team'),
                 Forms\Components\TextInput::make('black')
@@ -55,7 +58,7 @@ class RecordResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('date')
-                    ->date()
+                    ->date($format = 'Y-m-d')
                     ->sortable(),
                 // Tables\Columns\TextColumn::make('team')
                 //     ->searchable(),
