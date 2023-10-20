@@ -23,6 +23,9 @@ class RecordResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\DatePicker::make('date')
+                    ->required(),
+                Forms\Components\TextInput::make('team'),
                 Forms\Components\TextInput::make('black')
                     ->required(),
                 Forms\Components\TextInput::make('white')
@@ -41,7 +44,7 @@ class RecordResource extends Resource
                 Forms\Components\TextInput::make('round')
                     ->required(),
                 Forms\Components\TextInput::make('link'),
-                Forms\Components\TextInput::make('team'),
+
                 Forms\Components\TextInput::make('remark')
                     ->columnSpanFull(),
             ]);
@@ -54,21 +57,21 @@ class RecordResource extends Resource
                 Tables\Columns\TextColumn::make('date')
                     ->date()
                     ->sortable(),
+                // Tables\Columns\TextColumn::make('team')
+                //     ->searchable(),
                 Tables\Columns\TextColumn::make('black')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('white')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('winner')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('organization')
-                    ->searchable(),
+                // Tables\Columns\TextColumn::make('organization')
+                //     ->searchable(),
                 Tables\Columns\TextColumn::make('match')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('group')
-                    ->searchable(),
+                // Tables\Columns\TextColumn::make('group')
+                //     ->searchable(),
                 Tables\Columns\TextColumn::make('round')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('team')
                     ->searchable(),
             ])
             ->filters([
