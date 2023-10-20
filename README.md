@@ -10,6 +10,12 @@ Ratings is a web application to:
 - keep game records
 - calculate ratings among players
 
+## File Format
+
+Currently, the following format is supported:
+
+- [LIHKG](https://github.com/horaceho/ranks/blob/master/data/)
+
 ## Installation
 ```
 git clone git@github.com:horaceho/ratings.git
@@ -18,7 +24,7 @@ cp .env.example .env
 composer install
 php artisan key:generate
 php artisan storage:link
-torch database/database.sqlite
+touch database/database.sqlite
 php artisan migrate
 php artisan serve
 php artisan make:filament-user
