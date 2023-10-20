@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Imports\UploadsImportLihkg;
 use App\Models\Traits\HasCreatedBy;
 use App\Models\Traits\HasUpdatedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Upload extends Model
 {
@@ -28,5 +30,10 @@ class Upload extends Model
     public function records()
     {
         return $this->hasMany(Record::class);
+    }
+
+    public function doImport()
+    {
+        Excel::import(new UploadsImportLihkg($this), $this->filename, 'uploads');
     }
 }
