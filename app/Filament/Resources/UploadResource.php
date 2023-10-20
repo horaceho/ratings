@@ -17,7 +17,7 @@ class UploadResource extends Resource
 {
     protected static ?string $model = Upload::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-arrow-up-tray';
 
     public static function form(Form $form): Form
     {
@@ -25,10 +25,9 @@ class UploadResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('subject')
                     ->required(),
-                Forms\Components\Textarea::make('content')
-                    ->columnSpanFull(),
                 Forms\Components\FileUpload::make('filename')
                     ->required()
+                    ->columnSpanFull()
                     ->disk('uploads')
                     ->storeFileNamesIn('original'),
             ]);
