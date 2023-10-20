@@ -29,7 +29,15 @@ class UploadResource extends Resource
                     ->required()
                     ->columnSpanFull()
                     ->disk('uploads')
-                    ->storeFileNamesIn('original'),
+                    ->storeFileNamesIn('original')
+                    ->previewable(false),
+
+                Forms\Components\Placeholder::make('Players')
+                    // ->hintIcon('heroicon-o-user')
+                    ->content(fn (Upload $upload): ?string => $upload?->players()->count()),
+                Forms\Components\Placeholder::make('Records')
+                    // ->hintIcon('heroicon-o-table-cells')
+                    ->content(fn (Upload $upload): ?string => $upload?->records()->count()),
             ]);
     }
 

@@ -27,6 +27,11 @@ class Upload extends Model
         'info' => 'json',
     ];
 
+    public function players()
+    {
+        return $this->hasMany(Player::class);
+    }
+
     public function records()
     {
         return $this->hasMany(Record::class);
