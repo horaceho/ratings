@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Models\Record;
 use App\Models\Upload;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
@@ -32,6 +33,7 @@ class UploadsImportLihkgRecord implements ToCollection, WithHeadingRow, WithCalc
             $match = $row['match'] ?? $row['match_type'] ?? null;
             $group = $row['group'] ?? $row['season'] ?? null;
             $round = $row['round'] ?? null;
+            $short = Str::slug("#{$match} #{$group} #{$round}");
             $difference = $row['difference'] ?? 0.0;
 
             if (empty($date)  ||
@@ -55,6 +57,7 @@ class UploadsImportLihkgRecord implements ToCollection, WithHeadingRow, WithCalc
                 'result' => $row['result'] ?? '',
                 'handicap' => $difference,
                 'organization' => $row['organization'] ?? 'LIHKG',
+                'short' => $short,
                 'link' => $row['ogs_link'] ?? $row['link'] ?? '',
                 'team' => $row['team'] ?? '',
                 'remark' => $row['remark'] ?? '',

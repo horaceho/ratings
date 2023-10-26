@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('match');
             $table->string('group')->nullable();
             $table->string('round');
+            $table->string('short')->nullable();
             $table->string('link')->nullable();
             $table->string('team')->nullable();
             $table->string('remark')->nullable();

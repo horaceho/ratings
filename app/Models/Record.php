@@ -24,6 +24,7 @@ class Record extends Model
         'match',
         'group',
         'round',
+        'short',
         'link',
         'team',
         'remark',

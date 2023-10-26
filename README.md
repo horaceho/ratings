@@ -52,6 +52,11 @@ php artisan queue:restart
 composer dumpautoload
 ```
 
+## Reset database 💣
+```
+php artisan migrate:refresh
+```
+
 ## License
 
 Ratings is licensed under the [MIT license](https://opensource.org/licenses/MIT).

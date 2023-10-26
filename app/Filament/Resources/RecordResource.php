@@ -33,7 +33,8 @@ class RecordResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('white')
                     ->required(),
-                Forms\Components\TextInput::make('winner'),
+                Forms\Components\TextInput::make('winner')
+                    ->prefixIcon('heroicon-o-trophy'),
                 Forms\Components\TextInput::make('result'),
                 Forms\Components\TextInput::make('handicap')
                     ->required()
@@ -46,10 +47,18 @@ class RecordResource extends Resource
                 Forms\Components\TextInput::make('group'),
                 Forms\Components\TextInput::make('round')
                     ->required(),
-                Forms\Components\TextInput::make('link'),
-
+                Forms\Components\TextInput::make('link')
+                    ->prefixIcon('heroicon-o-link')
+                    ->url(),
                 Forms\Components\TextInput::make('remark')
                     ->columnSpanFull(),
+                Forms\Components\TextInput::make('short')
+                    ->label('')
+                    ->prefixIcon('heroicon-o-tag')
+                    ->disabled(),
+
+                // Forms\Components\Placeholder::make('')
+                //     ->content(fn (Record $record): ?string => $record?->short)
             ]);
     }
 
@@ -63,22 +72,31 @@ class RecordResource extends Resource
                 // Tables\Columns\TextColumn::make('team')
                 //     ->searchable(),
                 Tables\Columns\TextColumn::make('black')
+                    // ->label('⚫')
+                    ->copyable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('white')
+                    // ->label('⚪')
+                    ->copyable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('winner')
+                    ->label('🏆')
                     ->color('success')
+                    ->copyable()
                     ->searchable(),
                 // Tables\Columns\TextColumn::make('organization')
                 //     ->searchable(),
                 Tables\Columns\TextColumn::make('match')
                     ->label('')
+                    ->copyable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('group')
                     ->label('')
+                    ->copyable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('round')
                     ->label('')
+                    ->copyable()
                     ->searchable(),
             ])
             ->filters([
