@@ -41,4 +41,14 @@ class Upload extends Model
     {
         Excel::import(new UploadsImportLihkg($this), $this->filename, 'uploads');
     }
+
+    public function doDeletePlayers()
+    {
+        $this->players()->delete();
+    }
+
+    public function doDeleteRecords()
+    {
+        $this->records()->delete();
+    }
 }
