@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4bbe980fdc51b1a58f8bcc456ab92558",
+    "content-hash": "56997889ee882e3fad3dac117361e257",
     "packages": [
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -2137,6 +2137,45 @@
                 }
             ],
             "time": "2023-08-27T10:19:19+00:00"
+        },
+        {
+            "name": "horaceho/ers",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/horaceho/ers.git",
+                "reference": "8b8090ab858faf2f886ecca322707d58967d6ec3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/horaceho/ers/zipball/8b8090ab858faf2f886ecca322707d58967d6ec3",
+                "reference": "8b8090ab858faf2f886ecca322707d58967d6ec3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "HoraceHo\\Ers\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Horace Ho"
+                }
+            ],
+            "description": "EGF Rating System",
+            "support": {
+                "issues": "https://github.com/horaceho/ers/issues",
+                "source": "https://github.com/horaceho/ers/tree/1.0.1"
+            },
+            "time": "2023-10-26T03:40:45+00:00"
         },
         {
             "name": "kirschbaum-development/eloquent-power-joins",
