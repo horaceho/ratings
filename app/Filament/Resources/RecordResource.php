@@ -67,14 +67,18 @@ class RecordResource extends Resource
                 Tables\Columns\TextColumn::make('white')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('winner')
+                    ->color('success')
                     ->searchable(),
                 // Tables\Columns\TextColumn::make('organization')
                 //     ->searchable(),
                 Tables\Columns\TextColumn::make('match')
+                    ->label('')
                     ->searchable(),
-                // Tables\Columns\TextColumn::make('group')
-                //     ->searchable(),
+                Tables\Columns\TextColumn::make('group')
+                    ->label('')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('round')
+                    ->label('')
                     ->searchable(),
             ])
             ->filters([

@@ -49,6 +49,12 @@ class UploadResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('original')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('players_count')
+                    ->label('Players')
+                    ->counts('players'),
+                Tables\Columns\TextColumn::make('records_count')
+                    ->label('Records')
+                    ->counts('records'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

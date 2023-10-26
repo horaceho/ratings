@@ -29,9 +29,10 @@ class UploadsImportLihkgRecord implements ToCollection, WithHeadingRow, WithCalc
             $black = $row['black'];
             $white = $row['white'];
             $winner = $row['winner_name'];
-            $match = $row['match'];
-            $round = $row['round'];
-            $difference = $row['difference'] || 0.0;
+            $match = $row['match'] ?? $row['match_type'] ?? null;
+            $group = $row['group'] ?? $row['season'] ?? null;
+            $round = $row['round'] ?? null;
+            $difference = $row['difference'] ?? 0.0;
 
             if (empty($date)  ||
                 empty($black) ||
@@ -46,6 +47,7 @@ class UploadsImportLihkgRecord implements ToCollection, WithHeadingRow, WithCalc
                 'black' => $black,
                 'white' => $white,
                 'match' => $match,
+                'group' => $group,
                 'round' => $round,
             ], [
                 'date' => ExcelDate::excelToDateTimeObject($date),
