@@ -16,6 +16,8 @@ class Trial extends Model
     protected $fillable = [
         'algorithm',
         'organization',
+        'match',
+        'group',
         'from',
         'till',
         'handicap',
@@ -30,4 +32,9 @@ class Trial extends Model
         'meta' => 'json',
         'info' => 'json',
     ];
+
+    public function results()
+    {
+        return $this->hasMany(Result::class);
+    }
 }

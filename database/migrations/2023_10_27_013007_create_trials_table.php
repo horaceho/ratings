@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id()->startingValue(1_000_001);
             $table->string('algorithm');
             $table->string('organization')->nullable();
+            $table->string('match')->nullable();
+            $table->string('group')->nullable();
             $table->date('from')->nullable();
             $table->date('till')->nullable();
             $table->integer('handicap')->default(2);

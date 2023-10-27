@@ -28,4 +28,9 @@ class Player extends Model
         'meta' => 'json',
         'info' => 'json',
     ];
+
+    public function results()
+    {
+        return $this->hasMany(Result::class);
+    }
 }

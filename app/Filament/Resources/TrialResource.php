@@ -17,7 +17,7 @@ class TrialResource extends Resource
 {
     protected static ?string $model = Trial::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-beaker';
 
     public static function form(Form $form): Form
     {
@@ -28,6 +28,8 @@ class TrialResource extends Resource
                     ->default(config('ratings.algorithm.default'))
                     ->required(),
                 Forms\Components\TextInput::make('organization'),
+                Forms\Components\TextInput::make('match'),
+                Forms\Components\TextInput::make('group'),
                 Forms\Components\DatePicker::make('from')
                     ->default(now()->startOfYear()->subYears(10))
                     ->native(false)
@@ -68,6 +70,12 @@ class TrialResource extends Resource
                 Tables\Columns\TextColumn::make('algorithm')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('organization')
+                    ->label('')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('match')
+                    ->label('')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('group')
                     ->label('')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('from')

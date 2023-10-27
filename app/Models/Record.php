@@ -35,4 +35,19 @@ class Record extends Model
         'meta' => 'json',
         'info' => 'json',
     ];
+
+    public function results()
+    {
+        return $this->hasMany(Result::class);
+    }
+
+    public function blackPlayer()
+    {
+        return $this->belongsTo(Player::class, 'black', 'name');
+    }
+
+    public function whitePlayer()
+    {
+        return $this->belongsTo(Player::class, 'white', 'name');
+    }
 }
