@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\HasCreatedBy;
 use App\Models\Traits\HasUpdatedBy;
+use App\Services\ResultService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -36,5 +37,11 @@ class Trial extends Model
     public function results()
     {
         return $this->hasMany(Result::class);
+    }
+
+    public function doGenerate()
+    {
+        $this->results()->delete();
+        ResultService::generate($this);
     }
 }

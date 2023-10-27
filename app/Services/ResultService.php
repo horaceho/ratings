@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Record;
 use App\Models\Result;
 use App\Models\Trial;
+use HoraceHo\Ers;
 use Illuminate\Support\Collection;
 
 class ResultService
@@ -35,7 +36,8 @@ class ResultService
                     'opponent' => $record->white,
                     'winner' => $record->winner,
                 ], [
-                    'player_id' => $record->blackPlayer->id,
+                    'entrant_id' => $record->blackPlayer->id,
+                    'opposer_id' => $record->whitePlayer->id,
                     'record_id' => $record->id,
                     'trial_id' => $trial->id,
                 ]);
@@ -45,7 +47,8 @@ class ResultService
                     'opponent' => $record->black,
                     'winner' => $record->winner,
                 ], [
-                    'player_id' => $record->whitePlayer->id,
+                    'entrant_id' => $record->whitePlayer->id,
+                    'opposer_id' => $record->blackPlayer->id,
                     'record_id' => $record->id,
                     'trial_id' => $trial->id,
                 ]);

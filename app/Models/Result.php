@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,7 +20,8 @@ class Result extends Model
         'organization',
         'meta',
         'info',
-        'player_id',
+        'entrant_id',
+        'opposer_id',
         'record_id',
         'trial_id',
     ];
@@ -29,9 +31,14 @@ class Result extends Model
         'info' => 'json',
     ];
 
-    public function player()
+    public function entrant()
     {
-        return $this->belongsTo(Player::class);
+        return $this->belongsTo(Player::class, 'entrant_id');
+    }
+
+    public function opposer()
+    {
+        return $this->belongsTo(Player::class, 'opposer_id');
     }
 
     public function record()
@@ -42,5 +49,10 @@ class Result extends Model
     public function trial()
     {
         return $this->belongsTo(Trial::class);
+    }
+
+    public function getWinAttribute()
+    {
+        return $this->player === $this->winner ? 1.0 : 0.0;
     }
 }

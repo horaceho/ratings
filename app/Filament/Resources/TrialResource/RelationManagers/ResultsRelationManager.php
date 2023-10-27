@@ -28,8 +28,12 @@ class ResultsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('winner')
             ->columns([
-                Tables\Columns\TextColumn::make('player'),
-                Tables\Columns\TextColumn::make('opponent'),
+                Tables\Columns\TextColumn::make('date')
+                    ->date($format = 'Y-m-d'),
+                Tables\Columns\TextColumn::make('player')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('opponent')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('winner')
                     ->label('🏆')
                     ->color('success')

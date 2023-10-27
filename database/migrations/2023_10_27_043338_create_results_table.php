@@ -21,7 +21,8 @@ return new class extends Migration
             $table->decimal('update', 10, 3)->nullable();
             $table->json('meta')->nullable();
             $table->json('info')->nullable();
-            $table->foreignId('player_id')->nullable();
+            $table->foreignId('entrant_id')->nullable();
+            $table->foreignId('opposer_id')->nullable();
             $table->foreignId('record_id')->nullable();
             $table->foreignId('trial_id')->nullable();
             $table->timestamps();
