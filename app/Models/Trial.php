@@ -38,10 +38,4 @@ class Trial extends Model
     {
         return $this->hasMany(Result::class);
     }
-
-    public function doGenerate()
-    {
-        $this->results()->delete();
-        ResultService::generate($this);
-    }
 }

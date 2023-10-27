@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('other')->nullable();
             $table->string('init')->nullable();
             $table->string('rank')->nullable();
+            $table->decimal('gor', 10, 3)->default(0.0);
             $table->string('remark')->nullable();
             $table->json('meta')->nullable();
             $table->json('info')->nullable();

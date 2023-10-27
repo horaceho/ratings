@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\TrialResource\Pages;
 
 use App\Models\Trial;
+use App\Services\ResultService;
 use App\Filament\Resources\TrialResource;
 use Filament\Actions;
 use Filament\Notifications\Notification;
@@ -21,7 +22,7 @@ class ViewTrial extends ViewRecord
                 ->modalDescription('Confirm to generate results of this Trial?')
                 ->modalSubmitActionLabel('Yes, generate them!')
                 ->icon('heroicon-o-bolt')
-                ->action(fn (Trial $trial) => $trial->doGenerate())
+                ->action(fn (Trial $trial) => ResultService::refresh($trial))
                 ->after(fn () => Notification::make()
                     ->title('Generate successfully')
                     ->success()

@@ -5,6 +5,7 @@ namespace App\Filament\Resources\TrialResource\RelationManagers;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -40,9 +41,19 @@ class ResultsRelationManager extends RelationManager
                     ->copyable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('rating')
-                    ->numeric(),
+                    ->numeric(
+                        decimalPlaces: 3,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End),
                 Tables\Columns\TextColumn::make('update')
-                    ->numeric(),
+                    ->numeric(
+                        decimalPlaces: 3,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End),
             ])
             ->filters([
                 //

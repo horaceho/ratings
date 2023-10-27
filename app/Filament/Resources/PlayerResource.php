@@ -8,6 +8,7 @@ use App\Models\Player;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -47,8 +48,14 @@ class PlayerResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('init')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('rank')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('gor')
+                    ->numeric(
+                        decimalPlaces: 0,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End)
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('remark')
                     ->searchable(),
             ])

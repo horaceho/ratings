@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Player;
 use App\Models\Record;
 use App\Models\Result;
 use App\Models\Trial;
@@ -10,6 +11,16 @@ use Illuminate\Support\Collection;
 
 class ResultService
 {
+    public static function refresh(Trial $trial)
+    {
+        Player::query()->update([
+            'gor' => 0.0
+        ]);
+        $trial->results()->delete();
+        self::generate($trial);
+        self::calculate($trial);
+    }
+
     public static function generate(Trial $trial)
     {
         $query = Record::query();
@@ -56,5 +67,34 @@ class ResultService
         });
 
         return $trial->results()->count();
+    }
+
+    public static function calculate(Trial $trial)
+    {
+        $ers = new Ers\Ers();
+
+        $results = $trial->results()->with('entrant')->with('opposer')->get();
+        foreach ($results as $result) {
+            $entrant = $result->entrant->rating;
+            $opposer = $result->opposer->rating;
+
+            $updated = $ers->update(
+                $entrant,
+                $opposer,
+                $result->win,
+            );
+
+            echo ("{$result->player} {$result->opponent} {$result->winner} {$result->win} ");
+            echo ("{$entrant} {$opposer} {$updated}\n");
+
+            $result->entrant->update([
+                'gor' => $updated,
+            ]);
+
+            $result->update([
+                'rating' => $entrant,
+                'update' => $updated,
+            ]);
+        }
     }
 }

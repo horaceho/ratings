@@ -20,6 +20,7 @@ class Player extends Model
         'other',
         'init',
         'rank',
+        'gor',
         'remark',
         'upload_id',
     ];
@@ -32,5 +33,14 @@ class Player extends Model
     public function results()
     {
         return $this->hasMany(Result::class);
+    }
+
+    public function getRatingAttribute()
+    {
+        if ($this->gor > 0.0) {
+            return $this->gor;
+        }
+
+        return config('ratings.ranks')[$this->init] ?? 2100.0;
     }
 }
