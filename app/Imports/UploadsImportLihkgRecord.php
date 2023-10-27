@@ -30,10 +30,11 @@ class UploadsImportLihkgRecord implements ToCollection, WithHeadingRow, WithCalc
             $black = $row['black'];
             $white = $row['white'];
             $winner = $row['winner_name'];
+            $organization = $row['organization'] ?? 'LIHKG';
             $match = $row['match'] ?? $row['match_type'] ?? null;
             $group = $row['group'] ?? $row['season'] ?? null;
             $round = $row['round'] ?? null;
-            $short = Str::slug("#{$match} #{$group} #{$round}");
+            $short = Str::slug("#{$organization} #{$match} #{$group}");
             $difference = $row['difference'] ?? 0.0;
 
             if (empty($date)  ||
@@ -56,7 +57,7 @@ class UploadsImportLihkgRecord implements ToCollection, WithHeadingRow, WithCalc
                 'winner' => $winner,
                 'result' => $row['result'] ?? '',
                 'handicap' => $difference,
-                'organization' => $row['organization'] ?? 'LIHKG',
+                'organization' => $organization,
                 'short' => $short,
                 'link' => $row['ogs_link'] ?? $row['link'] ?? '',
                 'team' => $row['team'] ?? '',
