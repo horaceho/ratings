@@ -84,8 +84,6 @@ class RecordResource extends Resource
                     ->color('success')
                     ->copyable()
                     ->searchable(),
-                // Tables\Columns\TextColumn::make('organization')
-                //     ->searchable(),
                 Tables\Columns\TextColumn::make('match')
                     ->label('')
                     ->copyable()

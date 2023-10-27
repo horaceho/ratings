@@ -55,13 +55,14 @@ class ResultResource extends Resource
                 Tables\Columns\TextColumn::make('opponent')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('winner')
+                    ->label('🏆')
+                    ->color('success')
+                    ->copyable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('rating')
-                    ->numeric()
-                    ->sortable(),
+                    ->numeric(),
                 Tables\Columns\TextColumn::make('update')
-                    ->numeric()
-                    ->sortable(),
+                    ->numeric(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
