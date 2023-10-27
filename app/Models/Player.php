@@ -32,7 +32,7 @@ class Player extends Model
 
     public function results()
     {
-        return $this->hasMany(Result::class);
+        return $this->hasMany(Result::class, 'entrant_id');
     }
 
     public function getRatingAttribute()

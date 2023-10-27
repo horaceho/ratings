@@ -30,7 +30,7 @@ class PlayerResource extends Resource
                 Forms\Components\TextInput::make('alias'),
                 Forms\Components\TextInput::make('other'),
                 Forms\Components\TextInput::make('init'),
-                Forms\Components\TextInput::make('rank'),
+                Forms\Components\TextInput::make('gor'),
                 Forms\Components\TextInput::make('remark')
                     ->columnSpanFull(),
             ]);
@@ -43,8 +43,10 @@ class PlayerResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('alias')
+                    ->label('')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('other')
+                    ->label('')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('init')
                     ->searchable(),
@@ -77,7 +79,7 @@ class PlayerResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\ResultsRelationManager::class,
         ];
     }
 
