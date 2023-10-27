@@ -13,16 +13,22 @@ class ResultService
 {
     public static function refresh(Trial $trial)
     {
-        Player::query()->update([
-            'gor' => 0.0
-        ]);
-        $trial->results()->delete();
+        self::resetPlayersGoR();
         self::generate($trial);
         self::calculate($trial);
     }
 
+    public static function resetPlayersGoR()
+    {
+        Player::query()->update([
+            'gor' => 0.0
+        ]);
+    }
+
     public static function generate(Trial $trial)
     {
+        $trial->results()->delete();
+
         $query = Record::query();
 
         if (! empty($trial->organization)) {

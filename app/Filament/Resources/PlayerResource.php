@@ -59,6 +59,7 @@ class PlayerResource extends Resource
                 Tables\Columns\TextColumn::make('remark')
                     ->searchable(),
             ])
+            ->defaultSort('gor', 'desc')
             ->filters([
                 //
             ])
