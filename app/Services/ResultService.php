@@ -73,8 +73,8 @@ class ResultService
     {
         $ers = new Ers\Ers();
 
-        $results = $trial->results()->with('entrant')->with('opposer')->get();
-        foreach ($results as $result) {
+        $results = $trial->results()->with('entrant')->with('opposer');
+        foreach ($results->lazy() as $result) {
             $entrant = $result->entrant->rating;
             $opposer = $result->opposer->rating;
 
@@ -83,9 +83,6 @@ class ResultService
                 $opposer,
                 $result->win,
             );
-
-            echo ("{$result->player} {$result->opponent} {$result->winner} {$result->win} ");
-            echo ("{$entrant} {$opposer} {$updated}\n");
 
             $result->entrant->update([
                 'gor' => $updated,
