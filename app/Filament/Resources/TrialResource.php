@@ -24,8 +24,8 @@ class TrialResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('algorithm')
-                    ->options(config('ratings.algorithm.options'))
-                    ->default(config('ratings.algorithm.default'))
+                    ->options(config('ratings.algorithms.options'))
+                    ->default(config('ratings.algorithms.default'))
                     ->required(),
                 Forms\Components\TextInput::make('organization')
                     ->hint('WIP'),
@@ -101,6 +101,9 @@ class TrialResource extends Resource
                 Tables\Columns\TextColumn::make('slot'),
                 Tables\Columns\TextColumn::make('remark')
                     ->limit(50),
+                Tables\Columns\TextColumn::make('results_count')
+                    ->label('Results')
+                    ->counts('results'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

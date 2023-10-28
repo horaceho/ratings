@@ -2,10 +2,16 @@
 
 return [
 
-    'algorithm' => [
+    'algorithms' => [
         'default' => 'egf',
         'options' => [
             'egf' => 'EGF',
+        ],
+        'egf' => [
+            'defaults' => [
+                'con_div' => 200.0,
+                'con_pow' => 1.6,
+            ],
         ],
     ],
 

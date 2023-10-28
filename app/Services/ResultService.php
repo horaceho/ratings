@@ -47,7 +47,7 @@ class ResultService
 
         $query->chunk(100, function (Collection $records) use($trial) {
             foreach ($records as $record) {
-                Result::updateOrCreate([
+                $trial->results()->updateOrCreate([
                     'date' => $record->date,
                     'player' => $record->black,
                     'opponent' => $record->white,
@@ -56,10 +56,9 @@ class ResultService
                     'entrant_id' => $record->blackPlayer->id,
                     'opposer_id' => $record->whitePlayer->id,
                     'record_id' => $record->id,
-                    'trial_id' => $trial->id,
                     'slot' => $trial->slot,
                 ]);
-                Result::updateOrCreate([
+                $trial->results()->updateOrCreate([
                     'date' => $record->date,
                     'player' => $record->white,
                     'opponent' => $record->black,
@@ -68,7 +67,6 @@ class ResultService
                     'entrant_id' => $record->whitePlayer->id,
                     'opposer_id' => $record->blackPlayer->id,
                     'record_id' => $record->id,
-                    'trial_id' => $trial->id,
                     'slot' => $trial->slot,
                 ]);
             }
@@ -86,11 +84,19 @@ class ResultService
             $entrant = $result->entrant->rating($trial->slot);
             $opposer = $result->opposer->rating($trial->slot);
 
-            $updated = $ers->update(
-                $entrant,
-                $opposer,
-                $result->win,
-            );
+            $updated = $entrant;
+
+            if ($trial->algorithm === 'egf') {
+                $updated = $ers->update(
+                    $entrant,
+                    $opposer,
+                    $result->win,
+                    $trial->meta['con_div'] ?? config('ratings.algorithms.egf.defaults.con_div'),
+                    $trial->meta['con_pow'] ?? config('ratings.algorithms.egf.defaults.con_pow'),
+                );
+            } else {
+                ;
+            }
 
             $result->entrant->update([
                 $trial->slot => $updated,
