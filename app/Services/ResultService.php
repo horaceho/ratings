@@ -4,13 +4,14 @@ namespace App\Services;
 
 use App\Models\Player;
 use App\Models\Record;
-use App\Models\Result;
 use App\Models\Trial;
 use HoraceHo\Ers;
 use Illuminate\Support\Collection;
 
 class ResultService
 {
+    public static $ers;
+
     public static function refresh(Trial $trial)
     {
         self::resetPlayersGoR($trial);
@@ -77,8 +78,6 @@ class ResultService
 
     public static function calculate(Trial $trial)
     {
-        $ers = new Ers\Ers();
-
         $results = $trial->results()->with('entrant')->with('opposer');
         foreach ($results->lazy() as $result) {
             $entrant = $result->entrant->rating($trial->slot);
@@ -87,7 +86,7 @@ class ResultService
             $updated = $entrant;
 
             if ($trial->algorithm === 'egf') {
-                $updated = $ers->update(
+                $updated = self::$ers->update(
                     $entrant,
                     $opposer,
                     $result->win,
@@ -109,3 +108,5 @@ class ResultService
         }
     }
 }
+
+ResultService::$ers = new Ers\Ers();
