@@ -27,19 +27,24 @@ class ViewTrial extends ViewRecord
                     ->title('Generate successfully')
                     ->success()
                     ->send()),
+            Actions\Action::make('Export Rating')
+                ->requiresConfirmation()
+                ->modalHeading('Export Rating')
+                ->modalDescription('Confirm to export rating of this Trial?')
+                ->modalSubmitActionLabel('Yes, export them!')
+                ->icon('heroicon-o-trophy')
+                ->url(fn (Trial $trial): string => route('export.rating', ['id' => $trial]),
+                    shouldOpenInNewTab: true
+                ),
             Actions\Action::make('Export Chrono')
                 ->requiresConfirmation()
                 ->modalHeading('Export Chrono')
                 ->modalDescription('Confirm to export chrono of this Trial?')
                 ->modalSubmitActionLabel('Yes, export them!')
-                ->icon('heroicon-o-bolt')
+                ->icon('heroicon-o-arrow-trending-up')
                 ->url(fn (Trial $trial): string => route('export.chrono', ['id' => $trial]),
                     shouldOpenInNewTab: true
-                )
-                ->after(fn () => Notification::make()
-                    ->title('Export successfully')
-                    ->success()
-                    ->send()),
+                ),
             Actions\EditAction::make(),
         ];
     }
