@@ -3,10 +3,10 @@
 return [
 
     'algorithm' => [
+        'default' => 'egf',
         'options' => [
             'egf' => 'EGF',
         ],
-        'default' => 'egf',
     ],
 
     'ranks' => [
@@ -38,6 +38,23 @@ return [
        '19k' =>  200,
        '20k' =>  100,
         'na' => 2100,
-    ]
+    ],
 
+    'players' => [
+        'slot' => [
+            'default' => 's0',
+            'options' => [
+                's0' => 'S0',
+                's1' => 'S1',
+                's2' => 'S2',
+                's3' => 'S3',
+                's4' => 'S4',
+                's5' => 'S5',
+                's6' => 'S6',
+                's7' => 'S7',
+                's8' => 'S8',
+                's9' => 'S9',
+            ],
+        ],
+    ],
 ];

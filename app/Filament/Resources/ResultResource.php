@@ -60,6 +60,7 @@ class ResultResource extends Resource
                     ->color('success')
                     ->copyable()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('slot'),
                 Tables\Columns\TextColumn::make('rating')
                     ->numeric(
                         decimalPlaces: 3,

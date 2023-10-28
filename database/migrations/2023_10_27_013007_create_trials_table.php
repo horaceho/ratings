@@ -19,9 +19,10 @@ return new class extends Migration
             $table->string('group')->nullable();
             $table->date('from')->nullable();
             $table->date('till')->nullable();
-            $table->integer('handicap')->default(2);
-            $table->string('rank_lo')->default('30k');;
-            $table->string('rank_hi')->default('9d');;
+            $table->integer('handicap')->default(9);
+            $table->string('rank_lo')->default('30k');
+            $table->string('rank_hi')->default('9d');
+            $table->string('slot')->default('s0');
             $table->json('meta')->nullable();
             $table->json('info')->nullable();
             $table->string('remark')->nullable();

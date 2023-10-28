@@ -13,15 +13,31 @@ class ResultService
 {
     public static function refresh(Trial $trial)
     {
-        self::resetPlayersGoR();
+        self::resetPlayersGoR($trial);
         self::generate($trial);
         self::calculate($trial);
     }
 
-    public static function resetPlayersGoR()
+    public static function resetPlayersGoR(Trial $trial)
     {
         Player::query()->update([
-            'gor' => 0.0
+            $trial->slot => 0.0,
+        ]);
+    }
+
+    public static function resetPlayersSlots()
+    {
+        Player::query()->update([
+            's0' => 0.0,
+            's1' => 0.0,
+            's2' => 0.0,
+            's3' => 0.0,
+            's4' => 0.0,
+            's5' => 0.0,
+            's6' => 0.0,
+            's7' => 0.0,
+            's8' => 0.0,
+            's9' => 0.0,
         ]);
     }
 
@@ -57,6 +73,7 @@ class ResultService
                     'opposer_id' => $record->whitePlayer->id,
                     'record_id' => $record->id,
                     'trial_id' => $trial->id,
+                    'slot' => $trial->slot,
                 ]);
                 Result::updateOrCreate([
                     'date' => $record->date,
@@ -68,6 +85,7 @@ class ResultService
                     'opposer_id' => $record->blackPlayer->id,
                     'record_id' => $record->id,
                     'trial_id' => $trial->id,
+                    'slot' => $trial->slot,
                 ]);
             }
         });
@@ -81,8 +99,8 @@ class ResultService
 
         $results = $trial->results()->with('entrant')->with('opposer');
         foreach ($results->lazy() as $result) {
-            $entrant = $result->entrant->rating;
-            $opposer = $result->opposer->rating;
+            $entrant = $result->entrant->rating($trial->slot);
+            $opposer = $result->opposer->rating($trial->slot);
 
             $updated = $ers->update(
                 $entrant,
@@ -91,7 +109,7 @@ class ResultService
             );
 
             $result->entrant->update([
-                'gor' => $updated,
+                $trial->slot => $updated,
             ]);
 
             $result->update([

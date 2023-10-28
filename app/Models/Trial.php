@@ -24,6 +24,7 @@ class Trial extends Model
         'handicap',
         'rank_lo',
         'rank_hi',
+        'slot',
         'meta',
         'info',
         'remark',

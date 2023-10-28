@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('winner');
             $table->decimal('rating', 10, 3)->nullable();
             $table->decimal('update', 10, 3)->nullable();
+            $table->string('slot')->default('s0');
             $table->json('meta')->nullable();
             $table->json('info')->nullable();
             $table->foreignId('entrant_id')->nullable();

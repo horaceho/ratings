@@ -40,6 +40,8 @@ class ResultsRelationManager extends RelationManager
                     ->color('success')
                     ->copyable()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('slot')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('rating')
                     ->numeric(
                         decimalPlaces: 3,

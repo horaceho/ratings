@@ -41,6 +41,8 @@ class ResultsRelationManager extends RelationManager
                     ->color(fn($record) => $record->win ? 'success' : 'default')
                     ->copyable()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('slot')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('rating')
                     ->numeric(
                         decimalPlaces: 3,

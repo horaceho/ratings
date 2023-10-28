@@ -18,6 +18,7 @@ class Result extends Model
         'rating',
         'update',
         'organization',
+        'slot',
         'meta',
         'info',
         'entrant_id',

@@ -27,9 +27,12 @@ class TrialResource extends Resource
                     ->options(config('ratings.algorithm.options'))
                     ->default(config('ratings.algorithm.default'))
                     ->required(),
-                Forms\Components\TextInput::make('organization'),
-                Forms\Components\TextInput::make('match'),
-                Forms\Components\TextInput::make('group'),
+                Forms\Components\TextInput::make('organization')
+                    ->hint('WIP'),
+                Forms\Components\TextInput::make('match')
+                    ->hint('WIP'),
+                Forms\Components\TextInput::make('group')
+                    ->hint('WIP'),
                 Forms\Components\DatePicker::make('from')
                     ->default(now()->startOfYear()->subYears(10))
                     ->native(false)
@@ -44,22 +47,31 @@ class TrialResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('rank_hi')
                     ->default('7d')
+                    ->hint('Highest rank (default 7d)')
                     ->in(collect(config('ratings.ranks'))->keys()->toArray())
                     ->required(),
                 Forms\Components\TextInput::make('rank_lo')
                     ->default('20k')
+                    ->hint('Lowest rank (default 20k)')
                     ->in(collect(config('ratings.ranks'))->keys()->toArray())
                     ->required(),
                 Forms\Components\TextInput::make('handicap')
-                    ->required()
+                    ->default(9)
+                    ->hint('Maximum handicap (default 9)')
                     ->numeric()
-                    ->default(2),
+                    ->required(),
                 Forms\Components\TextInput::make('remark'),
                 Forms\Components\KeyValue::make('meta')
+                    ->hint('Algorithm parameters')
                     ->addActionLabel('')
                     ->addAction(
                         fn (Forms\Components\Actions\Action $action) => $action->icon('heroicon-o-plus'),
                     ),
+                Forms\Components\Select::make('slot')
+                    ->hint('Which player slot to save update GoR')
+                    ->options(config('ratings.players.slot.options'))
+                    ->default(config('ratings.players.slot.default'))
+                    ->required(),
             ]);
     }
 
@@ -86,6 +98,7 @@ class TrialResource extends Resource
                     ->numeric(),
                 Tables\Columns\TextColumn::make('rank_lo'),
                 Tables\Columns\TextColumn::make('rank_hi'),
+                Tables\Columns\TextColumn::make('slot'),
                 Tables\Columns\TextColumn::make('remark')
                     ->limit(50),
                 Tables\Columns\TextColumn::make('created_at')

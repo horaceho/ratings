@@ -31,6 +31,16 @@ class PlayerResource extends Resource
                 Forms\Components\TextInput::make('other'),
                 Forms\Components\TextInput::make('init'),
                 Forms\Components\TextInput::make('gor'),
+                Forms\Components\TextInput::make('s0'),
+                Forms\Components\TextInput::make('s1'),
+                Forms\Components\TextInput::make('s2'),
+                Forms\Components\TextInput::make('s3'),
+                Forms\Components\TextInput::make('s4'),
+                Forms\Components\TextInput::make('s5'),
+                Forms\Components\TextInput::make('s6'),
+                Forms\Components\TextInput::make('s7'),
+                Forms\Components\TextInput::make('s8'),
+                Forms\Components\TextInput::make('s9'),
                 Forms\Components\TextInput::make('remark')
                     ->columnSpanFull(),
             ]);
@@ -58,6 +68,93 @@ class PlayerResource extends Resource
                     )
                     ->alignment(Alignment::End)
                     ->sortable(),
+                Tables\Columns\TextColumn::make('s0')
+                    ->numeric(
+                        decimalPlaces: 0,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End)
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('s1')
+                    ->numeric(
+                        decimalPlaces: 0,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End)
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('s2')
+                    ->numeric(
+                        decimalPlaces: 0,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End)
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('s3')
+                    ->numeric(
+                        decimalPlaces: 0,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End)
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('s4')
+                    ->numeric(
+                        decimalPlaces: 0,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End)
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('s5')
+                    ->numeric(
+                        decimalPlaces: 0,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End)
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('s6')
+                    ->numeric(
+                        decimalPlaces: 0,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End)
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('s7')
+                    ->numeric(
+                        decimalPlaces: 0,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End)
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('s8')
+                    ->numeric(
+                        decimalPlaces: 0,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End)
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('s9')
+                    ->numeric(
+                        decimalPlaces: 0,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End)
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('remark')
                     ->searchable(),
             ])
