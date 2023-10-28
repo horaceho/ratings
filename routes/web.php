@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/login', function () {
+    return redirect(route('filament.admin.auth.login'));
+})->name('login');
+
+Route::get('/export/rating/{id}', [ExportController::class, 'rating'])
+    ->middleware('auth')
+    ->name('export.rating');
+
+Route::get('/export/chrono/{id}', [ExportController::class, 'chrono'])
+    ->middleware('auth')
+    ->name('export.chrono');

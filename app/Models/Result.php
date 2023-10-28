@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -50,6 +49,11 @@ class Result extends Model
     public function trial()
     {
         return $this->belongsTo(Trial::class);
+    }
+
+    public function getChangeAttribute()
+    {
+        return round($this->update - $this->rating, 3);
     }
 
     public function getWinAttribute()
