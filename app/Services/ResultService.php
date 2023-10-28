@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Models\Player;
 use App\Models\Record;
 use App\Models\Trial;
-use HoraceHo\Ers;
+use Horaceho\Ers;
 use Illuminate\Support\Collection;
 
 class ResultService
