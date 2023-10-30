@@ -50,6 +50,9 @@ class PlayerResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('rank')
+                    ->label('#')
+                    ->rowIndex(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('alias')
