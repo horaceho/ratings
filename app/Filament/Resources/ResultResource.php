@@ -33,12 +33,30 @@ class ResultResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('player')
                     ->required(),
-                Forms\Components\TextInput::make('opponent')
-                    ->required(),
-                Forms\Components\TextInput::make('rating')
+                Forms\Components\TextInput::make('pl_change')
+                    ->label('Change')
+                    ->numeric()
+                    ->readOnly(),
+                Forms\Components\TextInput::make('pl_rating')
+                    ->label('Rating')
                     ->numeric()
                     ->inputMode('decimal'),
-                Forms\Components\TextInput::make('update')
+                Forms\Components\TextInput::make('pl_update')
+                    ->label('Update')
+                    ->numeric()
+                    ->inputMode('decimal'),
+                Forms\Components\TextInput::make('opponent')
+                    ->required(),
+                Forms\Components\TextInput::make('op_change')
+                    ->label('Change')
+                    ->numeric()
+                    ->readOnly(),
+                Forms\Components\TextInput::make('op_rating')
+                    ->label('Rating')
+                    ->numeric()
+                    ->inputMode('decimal'),
+                Forms\Components\TextInput::make('op_update')
+                    ->label('Update')
                     ->numeric()
                     ->inputMode('decimal'),
             ]);
@@ -52,29 +70,67 @@ class ResultResource extends Resource
                     ->date($format = 'Y-m-d')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('player')
+                    ->color(fn ($record): string => $record->pl_result > 0.0 ? 'success' : 'default' )
                     ->searchable(),
+                Tables\Columns\TextColumn::make('pl_rating')
+                    ->label('')
+                    ->numeric(
+                        decimalPlaces: 3,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End),
+                Tables\Columns\TextColumn::make('pl_update')
+                    ->label('')
+                    ->numeric(
+                        decimalPlaces: 3,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End),
+                Tables\Columns\TextColumn::make('pl_change')
+                    ->label('')
+                    ->color(fn ($record): string => $record->pl_change >= 0.0 ? 'default' : 'danger' )
+                    ->numeric(
+                        decimalPlaces: 3,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End),
                 Tables\Columns\TextColumn::make('opponent')
+                    ->color(fn ($record): string => $record->op_result > 0.0 ? 'success' : 'default' )
                     ->searchable(),
+                Tables\Columns\TextColumn::make('op_rating')
+                    ->label('')
+                    ->numeric(
+                        decimalPlaces: 3,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End),
+                Tables\Columns\TextColumn::make('op_update')
+                    ->label('')
+                    ->numeric(
+                        decimalPlaces: 3,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End),
+                Tables\Columns\TextColumn::make('op_change')
+                    ->label('')
+                    ->color(fn ($record): string => $record->op_change >= 0.0 ? 'default' : 'danger' )
+                    ->numeric(
+                        decimalPlaces: 3,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End),
                 Tables\Columns\TextColumn::make('winner')
                     ->label('🏆')
                     ->color('success')
                     ->copyable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slot'),
-                Tables\Columns\TextColumn::make('rating')
-                    ->numeric(
-                        decimalPlaces: 3,
-                        decimalSeparator: '.',
-                        thousandsSeparator: '',
-                    )
-                    ->alignment(Alignment::End),
-                Tables\Columns\TextColumn::make('update')
-                    ->numeric(
-                        decimalPlaces: 3,
-                        decimalSeparator: '.',
-                        thousandsSeparator: '',
-                    )
-                    ->alignment(Alignment::End),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

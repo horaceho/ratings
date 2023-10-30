@@ -26,8 +26,8 @@ class ChronoExport implements FromCollection, WithHeadings
                 'player',
                 'opponent',
                 'winner',
-                'rating',
-                'update',
+                'pl_rating',
+                'pl_update',
                 'change',
             ]);
         });

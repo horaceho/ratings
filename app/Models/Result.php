@@ -14,8 +14,14 @@ class Result extends Model
         'player',
         'opponent',
         'winner',
-        'rating',
-        'update',
+        'pl_rating',
+        'pl_update',
+        'pl_change',
+        'pl_result',
+        'op_rating',
+        'op_update',
+        'op_change',
+        'op_result',
         'organization',
         'slot',
         'meta',
@@ -49,15 +55,5 @@ class Result extends Model
     public function trial()
     {
         return $this->belongsTo(Trial::class);
-    }
-
-    public function getChangeAttribute()
-    {
-        return round($this->update - $this->rating, 3);
-    }
-
-    public function getWinAttribute()
-    {
-        return $this->player === $this->winner ? 1.0 : 0.0;
     }
 }

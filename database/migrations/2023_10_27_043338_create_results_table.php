@@ -17,8 +17,14 @@ return new class extends Migration
             $table->string('player');
             $table->string('opponent');
             $table->string('winner');
-            $table->decimal('rating', 10, 3)->nullable();
-            $table->decimal('update', 10, 3)->nullable();
+            $table->decimal('pl_rating', 10, 3)->nullable();
+            $table->decimal('pl_update', 10, 3)->nullable();
+            $table->decimal('pl_change', 10, 3)->nullable();
+            $table->decimal('pl_result', 10, 3)->nullable();
+            $table->decimal('op_rating', 10, 3)->nullable();
+            $table->decimal('op_update', 10, 3)->nullable();
+            $table->decimal('op_change', 10, 3)->nullable();
+            $table->decimal('op_result', 10, 3)->nullable();
             $table->string('slot')->default('s0');
             $table->json('meta')->nullable();
             $table->json('info')->nullable();

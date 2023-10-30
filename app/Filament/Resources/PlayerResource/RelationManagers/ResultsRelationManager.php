@@ -31,32 +31,69 @@ class ResultsRelationManager extends RelationManager
             ->recordTitleAttribute('winner')
             ->columns([
                 Tables\Columns\TextColumn::make('date')
-                ->date($format = 'Y-m-d'),
+                    ->date($format = 'Y-m-d'),
                 Tables\Columns\TextColumn::make('player')
+                    ->color(fn ($record): string => $record->pl_result > 0.0 ? 'success' : 'default' )
                     ->searchable(),
+                Tables\Columns\TextColumn::make('pl_rating')
+                    ->label('')
+                    ->numeric(
+                        decimalPlaces: 3,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End),
+                Tables\Columns\TextColumn::make('pl_update')
+                    ->label('')
+                    ->numeric(
+                        decimalPlaces: 3,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End),
+                Tables\Columns\TextColumn::make('pl_change')
+                    ->label('')
+                    ->color(fn ($record): string => $record->pl_change >= 0.0 ? 'default' : 'danger' )
+                    ->numeric(
+                        decimalPlaces: 3,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End),
                 Tables\Columns\TextColumn::make('opponent')
+                    ->color(fn ($record): string => $record->op_result > 0.0 ? 'success' : 'default' )
                     ->searchable(),
+                Tables\Columns\TextColumn::make('op_rating')
+                    ->label('')
+                    ->numeric(
+                        decimalPlaces: 3,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End),
+                Tables\Columns\TextColumn::make('op_update')
+                    ->label('')
+                    ->numeric(
+                        decimalPlaces: 3,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End),
+                Tables\Columns\TextColumn::make('op_change')
+                    ->label('')
+                    ->color(fn ($record): string => $record->op_change >= 0.0 ? 'default' : 'danger' )
+                    ->numeric(
+                        decimalPlaces: 3,
+                        decimalSeparator: '.',
+                        thousandsSeparator: '',
+                    )
+                    ->alignment(Alignment::End),
                 Tables\Columns\TextColumn::make('winner')
                     ->label('🏆')
-                    ->color(fn($record) => $record->win ? 'success' : 'default')
+                    ->color('success')
                     ->copyable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('slot')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('rating')
-                    ->numeric(
-                        decimalPlaces: 3,
-                        decimalSeparator: '.',
-                        thousandsSeparator: '',
-                    )
-                    ->alignment(Alignment::End),
-                Tables\Columns\TextColumn::make('update')
-                    ->numeric(
-                        decimalPlaces: 3,
-                        decimalSeparator: '.',
-                        thousandsSeparator: '',
-                    )
-                    ->alignment(Alignment::End),
+                Tables\Columns\TextColumn::make('slot'),
             ])
             ->filters([
                 //
