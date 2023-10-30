@@ -24,11 +24,14 @@ class ChronoExport implements FromCollection, WithHeadings
             return $result->only([
                 'date',
                 'player',
-                'opponent',
-                'winner',
                 'pl_rating',
                 'pl_update',
-                'change',
+                'pl_change',
+                'opponent',
+                'op_rating',
+                'op_update',
+                'op_change',
+                'winner',
             ]);
         });
     }
@@ -38,11 +41,14 @@ class ChronoExport implements FromCollection, WithHeadings
         return [
            'Date',
            'Player',
+           'Pl Rating',
+           'Pl Update',
+           'Pl Change',
            'Opponent',
+           'Op Rating',
+           'Op Update',
+           'Op Change',
            'Winner',
-           'Rating',
-           'Update',
-           'Change',
         ];
     }
 }
