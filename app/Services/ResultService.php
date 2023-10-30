@@ -51,6 +51,8 @@ class ResultService
             $player->where('rating_init', '>=', $rating_lo)->where('rating_init', '<=', $rating_hi);
         });
 
+        $query->where('handicap', '<=', $trial->handicap);
+
         $query->orderBy('date');
         $query->with('blackPlayer');
         $query->with('whitePlayer');

@@ -56,8 +56,8 @@ class TrialResource extends Resource
                     ->in(collect(config('ratings.ranks'))->keys()->toArray())
                     ->required(),
                 Forms\Components\TextInput::make('handicap')
-                    ->default(9)
-                    ->hint('Maximum handicap (default 9)')
+                    ->default(0)
+                    ->hint('Maximum handicap (default 0)')
                     ->numeric()
                     ->required(),
                 Forms\Components\TextInput::make('remark'),
