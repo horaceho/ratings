@@ -51,6 +51,9 @@ class ResultService
             $player->where('rating_init', '>=', $rating_lo)->where('rating_init', '<=', $rating_hi);
         });
 
+        $query->whereDate('records.date', '>=', $trial->from);
+        $query->whereDate('records.date', '<=', $trial->till);
+
         $query->where('handicap', '<=', $trial->handicap);
 
         $query->orderBy('date');
