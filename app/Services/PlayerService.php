@@ -29,4 +29,55 @@ class PlayerService
             's9' => 0.0,
         ]);
     }
+
+    public static function rankings(string $slot)
+    {
+        return Player::orderBy($slot, 'desc')
+            ->withCount([
+                'results as win' => function($result) use ($slot) {
+                    $result->where('slot', $slot)->where('pl_result', '>', 0.5);
+                },
+                'results as loss' => function($result) use ($slot) {
+                    $result->where('slot', $slot)->where('pl_result', '<', 0.5);
+                },
+            ])
+            ->get()
+            ->map(function ($result) use ($slot) {
+                return $result->only([
+                    'rank',
+                    'name',
+                    $slot,
+                    'total',
+                    'win',
+                    'loss',
+                    'rate',
+                    'status',
+                ]);
+            })
+            ->map(function($result) {
+                $total = $result['win'] + $result['loss'];
+                $rate = $total > 0 ? $result['win'] / $total : 0.0;
+                $result['total'] = $total;
+                $result['rate'] = round($rate, 3);
+                return $result;
+            })
+            ->map(function($result, $key) {
+                $result['rank'] = $key + 1;
+                return $result;
+            });
+    }
+
+    public static function headings(string $slot)
+    {
+        return [
+            'Rank',
+            'Player',
+            'GoR',
+            'Total',
+            'Win',
+            'Loss',
+            'Rate',
+            'Status',
+         ];
+    }
 }

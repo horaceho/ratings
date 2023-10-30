@@ -2,13 +2,15 @@
 
 namespace App\Exports;
 
-use App\Models\Player;
+
 use App\Models\Trial;
+use App\Services\PlayerService;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 
-class RatingExport implements FromCollection, WithHeadings
+class RatingExport implements FromCollection, WithHeadings, WithStrictNullComparison
 {
     use Exportable;
 
@@ -21,30 +23,11 @@ class RatingExport implements FromCollection, WithHeadings
 
     public function collection()
     {
-        $slot = $this->trial->slot;
-        return Player::orderBy($slot, 'desc')->get()->map(function ($result) use ($slot) {
-            return $result->only([
-                'id',
-                'name',
-                $slot,
-                'win',
-                'loss',
-                'rate',
-                'status',
-            ]);
-        });
+        return PlayerService::rankings($this->trial->slot);
     }
 
     public function headings(): array
     {
-        return [
-           'ID',
-           'Name',
-           'GoR',
-           'Win',
-           'Loss',
-           'Rate',
-           'Status',
-        ];
+        return PlayerService::headings($this->trial->slot);
     }
 }
