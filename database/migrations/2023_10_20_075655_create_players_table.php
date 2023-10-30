@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('other')->nullable();
             $table->string('init')->nullable();
             $table->string('rank')->nullable();
+            $table->decimal('rating_init', 10, 3)->default(0.0);
+            $table->decimal('rating_rank', 10, 3)->default(0.0);
             $table->decimal('gor', 10, 3)->default(0.0);
             $table->decimal('s0', 10, 3)->default(0.0);
             $table->decimal('s1', 10, 3)->default(0.0);

@@ -42,6 +42,15 @@ class ResultService
             $query->where('group', $trial->group);
         }
 
+        $rating_hi = $trial->rating_hi;
+        $rating_lo = $trial->rating_lo;
+        $query->whereHas('blackPlayer', function($player) use ($rating_hi, $rating_lo) {
+            $player->where('rating_init', '>=', $rating_lo)->where('rating_init', '<=', $rating_hi);
+        });
+        $query->whereHas('whitePlayer', function($player) use ($rating_hi, $rating_lo) {
+            $player->where('rating_init', '>=', $rating_lo)->where('rating_init', '<=', $rating_hi);
+        });
+
         $query->orderBy('date');
         $query->with('blackPlayer');
         $query->with('whitePlayer');
@@ -78,7 +87,10 @@ class ResultService
 
     public static function calculate(Trial $trial)
     {
-        $results = $trial->results()->with('entrant')->with('opposer');
+        $results = $trial->results()
+            ->with('entrant')
+            ->with('opposer');
+
         foreach ($results->lazy() as $result) {
             $entrant = $result->entrant->rating($trial->slot);
             $opposer = $result->opposer->rating($trial->slot);
