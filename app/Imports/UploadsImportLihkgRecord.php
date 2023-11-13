@@ -27,8 +27,8 @@ class UploadsImportLihkgRecord implements ToCollection, WithHeadingRow, WithCalc
     {
         foreach ($collection as $row) {
             $date = $row['date'];
-            $black = $row['black'];
-            $white = $row['white'];
+            $black = $row['black'] ?? $row['player1'] ?? $row['player_1'] ?? null;
+            $white = $row['white'] ?? $row['player2'] ?? $row['player_2'] ?? null;
             $winner = $row['winner_name'];
             $organization = $row['organization'] ?? 'LIHKG';
             $match = $row['match'] ?? $row['match_type'] ?? null;
