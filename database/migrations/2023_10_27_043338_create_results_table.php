@@ -28,8 +28,8 @@ return new class extends Migration
             $table->string('slot')->default('s0');
             $table->json('meta')->nullable();
             $table->json('info')->nullable();
-            $table->foreignId('entrant_id')->nullable();
-            $table->foreignId('opposer_id')->nullable();
+            $table->foreignId('entrant_id')->nullable()->index();
+            $table->foreignId('opposer_id')->nullable()->index();
             $table->foreignId('record_id')->nullable();
             $table->foreignId('trial_id')->nullable();
             $table->timestamps();

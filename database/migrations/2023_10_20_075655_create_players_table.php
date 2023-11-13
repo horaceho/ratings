@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('players', function (Blueprint $table) {
             $table->id()->startingValue(1_000_001);
             $table->string('code')->nullable();
-            $table->string('name');
+            $table->string('name')->index();
             $table->string('alias')->nullable();
             $table->string('other')->nullable();
             $table->string('init')->nullable();

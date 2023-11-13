@@ -96,15 +96,14 @@ class ResultService
 
     public static function calculate(Trial $trial)
     {
-        $results = $trial->results()
-            ->with('entrant')
-            ->with('opposer');
+        $results = $trial->results();
 
         foreach ($results->lazy() as $result) {
             $pl_rating = $result->entrant->rating($trial->slot);
             $op_rating = $result->opposer->rating($trial->slot);
 
             $pl_update = $pl_rating;
+            $op_update = $op_rating;
 
             if ($trial->algorithm === 'egf') {
                 $pl_update = self::$ers->update(
