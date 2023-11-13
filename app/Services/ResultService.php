@@ -16,7 +16,6 @@ class ResultService
     {
         self::resetPlayersGoR($trial);
         self::generate($trial);
-        self::calculate($trial);
     }
 
     public static function resetPlayersGoR(Trial $trial)
@@ -62,81 +61,86 @@ class ResultService
 
         $query->chunk(100, function (Collection $records) use($trial) {
             foreach ($records as $record) {
-                $trial->results()->updateOrCreate([
+                $black = $trial->results()->create([
+                    'record_id' => $record->id,
                     'date' => $record->date,
                     'player' => $record->black,
                     'opponent' => $record->white,
                     'winner' => $record->winner,
-                ], [
                     'entrant_id' => $record->blackPlayer->id,
                     'opposer_id' => $record->whitePlayer->id,
-                    'record_id' => $record->id,
                     'slot' => $trial->slot,
                     'pl_result' => $record->black === $record->winner ? 1.0 : 0.0,
                     'op_result' => $record->black === $record->winner ? 0.0 : 1.0,
                 ]);
-                $trial->results()->updateOrCreate([
+
+                $white = $trial->results()->create([
+                    'record_id' => $record->id,
                     'date' => $record->date,
                     'player' => $record->white,
                     'opponent' => $record->black,
                     'winner' => $record->winner,
-                ], [
                     'entrant_id' => $record->whitePlayer->id,
                     'opposer_id' => $record->blackPlayer->id,
-                    'record_id' => $record->id,
                     'slot' => $trial->slot,
                     'pl_result' => $record->white === $record->winner ? 1.0 : 0.0,
                     'op_result' => $record->white === $record->winner ? 0.0 : 1.0,
+                ]);
+
+                $pl_rating = $black->entrant->rating($trial->slot);
+                $op_rating = $white->entrant->rating($trial->slot);
+
+                $pl_update = $pl_rating;
+                $op_update = $op_rating;
+
+                if ($trial->algorithm === 'egf') {
+                    $pl_update = self::$ers->update(
+                        $pl_rating,
+                        $op_rating,
+                        $black->pl_result,
+                        $trial->meta['con_div'] ?? config('ratings.algorithms.egf.defaults.con_div'),
+                        $trial->meta['con_pow'] ?? config('ratings.algorithms.egf.defaults.con_pow'),
+                    );
+                    $op_update = self::$ers->update(
+                        $op_rating,
+                        $pl_rating,
+                        $white->pl_result,
+                        $trial->meta['con_div'] ?? config('ratings.algorithms.egf.defaults.con_div'),
+                        $trial->meta['con_pow'] ?? config('ratings.algorithms.egf.defaults.con_pow'),
+                    );
+                } else {
+                    ;
+                }
+
+                $black->update([
+                    'pl_rating' => $pl_rating,
+                    'pl_update' => $pl_update,
+                    'pl_change' => round($pl_update - $pl_rating, 3),
+                    'op_rating' => $op_rating,
+                    'op_update' => $op_update,
+                    'op_change' => round($op_update - $op_rating, 3),
+                ]);
+
+                $white->update([
+                    'pl_rating' => $op_rating,
+                    'pl_update' => $op_update,
+                    'pl_change' => round($op_update - $op_rating, 3),
+                    'op_rating' => $pl_rating,
+                    'op_update' => $pl_update,
+                    'op_change' => round($pl_update - $pl_rating, 3),
+                ]);
+
+                $black->entrant->update([
+                    $trial->slot => $pl_update,
+                ]);
+
+                $white->entrant->update([
+                    $trial->slot => $op_update,
                 ]);
             }
         });
 
         return $trial->results()->count();
-    }
-
-    public static function calculate(Trial $trial)
-    {
-        $results = $trial->results();
-
-        foreach ($results->lazy() as $result) {
-            $pl_rating = $result->entrant->rating($trial->slot);
-            $op_rating = $result->opposer->rating($trial->slot);
-
-            $pl_update = $pl_rating;
-            $op_update = $op_rating;
-
-            if ($trial->algorithm === 'egf') {
-                $pl_update = self::$ers->update(
-                    $pl_rating,
-                    $op_rating,
-                    $result->pl_result,
-                    $trial->meta['con_div'] ?? config('ratings.algorithms.egf.defaults.con_div'),
-                    $trial->meta['con_pow'] ?? config('ratings.algorithms.egf.defaults.con_pow'),
-                );
-                $op_update = self::$ers->update(
-                    $op_rating,
-                    $pl_rating,
-                    $result->op_result,
-                    $trial->meta['con_div'] ?? config('ratings.algorithms.egf.defaults.con_div'),
-                    $trial->meta['con_pow'] ?? config('ratings.algorithms.egf.defaults.con_pow'),
-                );
-            } else {
-                ;
-            }
-
-            $result->entrant->update([
-                $trial->slot => $pl_update,
-            ]);
-
-            $result->update([
-                'pl_rating' => $pl_rating,
-                'pl_update' => $pl_update,
-                'pl_change' => round($pl_update - $pl_rating, 3),
-                'op_rating' => $op_rating,
-                'op_update' => $op_update,
-                'op_change' => round($op_update - $op_rating, 3),
-            ]);
-        }
     }
 }
 
