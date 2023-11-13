@@ -11,8 +11,7 @@ use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Database\Eloquent\Model;
 
 class PlayerResource extends Resource
 {
@@ -69,6 +68,9 @@ class PlayerResource extends Resource
                         decimalSeparator: '.',
                         thousandsSeparator: '',
                     )
+                    ->tooltip(function (Model $record): float {
+                        return round($record->gor, 3);
+                    })
                     ->alignment(Alignment::End)
                     ->sortable(),
                 Tables\Columns\TextColumn::make('s0')
@@ -77,6 +79,9 @@ class PlayerResource extends Resource
                         decimalSeparator: '.',
                         thousandsSeparator: '',
                     )
+                    ->tooltip(function (Model $record): float {
+                        return round($record->s0, 3);
+                    })
                     ->alignment(Alignment::End)
                     ->sortable(),
                 Tables\Columns\TextColumn::make('s1')
@@ -85,6 +90,9 @@ class PlayerResource extends Resource
                         decimalSeparator: '.',
                         thousandsSeparator: '',
                     )
+                    ->tooltip(function (Model $record): float {
+                        return round($record->s1, 3);
+                    })
                     ->alignment(Alignment::End)
                     ->sortable(),
                 Tables\Columns\TextColumn::make('s2')
@@ -93,6 +101,9 @@ class PlayerResource extends Resource
                         decimalSeparator: '.',
                         thousandsSeparator: '',
                     )
+                    ->tooltip(function (Model $record): float {
+                        return round($record->s2, 3);
+                    })
                     ->alignment(Alignment::End)
                     ->sortable(),
                 Tables\Columns\TextColumn::make('s3')
@@ -101,6 +112,9 @@ class PlayerResource extends Resource
                         decimalSeparator: '.',
                         thousandsSeparator: '',
                     )
+                    ->tooltip(function (Model $record): float {
+                        return round($record->s3, 3);
+                    })
                     ->alignment(Alignment::End)
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -110,6 +124,9 @@ class PlayerResource extends Resource
                         decimalSeparator: '.',
                         thousandsSeparator: '',
                     )
+                    ->tooltip(function (Model $record): float {
+                        return round($record->s4, 3);
+                    })
                     ->alignment(Alignment::End)
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -119,6 +136,9 @@ class PlayerResource extends Resource
                         decimalSeparator: '.',
                         thousandsSeparator: '',
                     )
+                    ->tooltip(function (Model $record): float {
+                        return round($record->s5, 3);
+                    })
                     ->alignment(Alignment::End)
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -128,6 +148,9 @@ class PlayerResource extends Resource
                         decimalSeparator: '.',
                         thousandsSeparator: '',
                     )
+                    ->tooltip(function (Model $record): float {
+                        return round($record->s6, 3);
+                    })
                     ->alignment(Alignment::End)
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -137,6 +160,9 @@ class PlayerResource extends Resource
                         decimalSeparator: '.',
                         thousandsSeparator: '',
                     )
+                    ->tooltip(function (Model $record): float {
+                        return round($record->s7, 3);
+                    })
                     ->alignment(Alignment::End)
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -146,6 +172,9 @@ class PlayerResource extends Resource
                         decimalSeparator: '.',
                         thousandsSeparator: '',
                     )
+                    ->tooltip(function (Model $record): float {
+                        return round($record->s8, 3);
+                    })
                     ->alignment(Alignment::End)
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -155,6 +184,9 @@ class PlayerResource extends Resource
                         decimalSeparator: '.',
                         thousandsSeparator: '',
                     )
+                    ->tooltip(function (Model $record): float {
+                        return round($record->s9, 3);
+                    })
                     ->alignment(Alignment::End)
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
