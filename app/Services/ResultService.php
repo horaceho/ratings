@@ -25,6 +25,21 @@ class ResultService
         ]);
     }
 
+    public static function conMulOfPlayer(Trial $trial, $rating)
+    {
+        // con weight of $rating in rating zone
+        $con_mul = 1.0;
+        $regex = '/^con_mul:(\d+)<(\d+)$/';
+        foreach ($trial->meta as $key => $val) {
+            if (preg_match($regex, $key, $segments)) {
+                if ($rating >= ($segments[1]) && $rating < floatval($segments[2])) {
+                    $con_mul = floatval($val);
+                }
+            }
+        }
+        return $con_mul;
+    }
+
     public static function generate(Trial $trial)
     {
         $trial->results()->delete();
@@ -100,13 +115,16 @@ class ResultService
                         $black->pl_result,
                         $trial->meta['con_div'] ?? config('ratings.algorithms.egf.defaults.con_div'),
                         $trial->meta['con_pow'] ?? config('ratings.algorithms.egf.defaults.con_pow'),
+                        self::conMulOfPlayer($trial, $pl_rating),
                     );
+
                     $op_update = self::$ers->update(
                         $op_rating,
                         $pl_rating,
                         $white->pl_result,
                         $trial->meta['con_div'] ?? config('ratings.algorithms.egf.defaults.con_div'),
                         $trial->meta['con_pow'] ?? config('ratings.algorithms.egf.defaults.con_pow'),
+                        self::conMulOfPlayer($trial, $op_rating),
                     );
                 } else {
                     ;
