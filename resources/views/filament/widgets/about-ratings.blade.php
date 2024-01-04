@@ -11,7 +11,7 @@
                 </a>
 
                 <p class="text-xs text-gray-500 dark:text-gray-400">
-                    v1.1.0
+                    v1.2.0
                 </p>
             </div>
 
