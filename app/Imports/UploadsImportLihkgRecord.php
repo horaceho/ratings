@@ -47,13 +47,13 @@ class UploadsImportLihkgRecord implements ToCollection, WithHeadingRow, WithCalc
             }
 
             $record = Record::updateOrCreate([
+                'date' => ExcelDate::excelToDateTimeObject($date),
                 'black' => $black,
                 'white' => $white,
                 'match' => $match,
                 'group' => $group,
                 'round' => $round,
             ], [
-                'date' => ExcelDate::excelToDateTimeObject($date),
                 'winner' => $winner,
                 'result' => $row['result'] ?? '',
                 'handicap' => $difference,

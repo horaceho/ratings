@@ -27,8 +27,7 @@ class PlayerObserver
      */
     public function saving(Player $player): void
     {
-        $player->rating_init = config('ratings.ranks')[$player->init] ?? 0.0;
-        $player->rating_rank = config('ratings.ranks')[$player->rank] ?? 0.0;
+        $player->rating_init = config('ratings.ranks')[$player->init] ?? $player->init;
     }
 
     /**
