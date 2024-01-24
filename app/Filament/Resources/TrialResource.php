@@ -47,13 +47,11 @@ class TrialResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('rank_hi')
                     ->default('7d')
-                    ->hint('Highest rank (default 7d)')
-                    ->in(collect(config('ratings.ranks'))->keys()->toArray())
+                    ->hint('Highest rank (default 7d, 2700)')
                     ->required(),
                 Forms\Components\TextInput::make('rank_lo')
                     ->default('20k')
-                    ->hint('Lowest rank (default 20k)')
-                    ->in(collect(config('ratings.ranks'))->keys()->toArray())
+                    ->hint('Lowest rank (default 20k, 100)')
                     ->required(),
                 Forms\Components\TextInput::make('handicap')
                     ->default(0)

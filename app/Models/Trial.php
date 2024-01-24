@@ -41,11 +41,11 @@ class Trial extends Model
 
     public function getRatingHiAttribute()
     {
-        return config('ratings.ranks')[$this->rank_hi] ?? config('ratings.ranks.hi');
+        return config('ratings.ranks')[$this->rank_hi] ?? (integer) $this->rank_hi ?? config('ratings.ranks.hi');
     }
 
     public function getRatingLoAttribute()
     {
-        return config('ratings.ranks')[$this->rank_lo] ?? config('ratings.ranks.lo');
+        return config('ratings.ranks')[$this->rank_lo] ?? (integer) $this->rank_lo ?? config('ratings.ranks.lo');
     }
 }
