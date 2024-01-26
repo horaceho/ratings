@@ -51,6 +51,6 @@ class Player extends Model
             return $this->getAttribute($slot);
         }
 
-        return config('ratings.ranks')[$this->init] ?? 2100.0;
+        return config('ratings.ranks')[$this->init] ?? (integer) $this->init;
     }
 }
