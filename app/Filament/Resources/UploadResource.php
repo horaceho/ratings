@@ -30,6 +30,7 @@ class UploadResource extends Resource
                     ->columnSpanFull()
                     ->disk('uploads')
                     ->storeFileNamesIn('original')
+                    ->downloadable()
                     ->previewable(false),
 
                 Forms\Components\Placeholder::make('Players')
