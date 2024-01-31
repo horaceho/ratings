@@ -14,8 +14,18 @@ class PlayerRatingsChart extends ChartWidget
     {
      // self::$heading = $this->record->name;
         $results = $this->record->results()
-            ->with('record')
-            ->orderBy('date')
+            ->select(
+                'results.pl_rating',
+                'records.date',
+                'records.match',
+                'records.group',
+                'records.round',
+            )
+            ->join('records', 'records.id', '=', 'results.record_id')
+            ->orderBy('records.date')
+            ->orderBy('records.match')
+            ->orderBy('records.group')
+            ->orderBy('records.round')
             ->get();
 
         return [
@@ -26,7 +36,7 @@ class PlayerRatingsChart extends ChartWidget
                 ],
             ],
             'labels' => $results->map(fn($result) =>
-                substr($result->record->date, 0, 4).' '.$result->record->match.' '.$result->record->round),
+                substr($result->date, 0, 4).' '.$result->match.' '.$result->group.' '.$result->round),
         ];
     }
 
