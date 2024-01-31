@@ -20,19 +20,22 @@ class ChronoExport implements FromCollection, WithHeadings
 
     public function collection()
     {
-        return $this->trial->results()->get()->map(function ($result) {
-            return $result->only([
-                'date',
-                'player',
-                'pl_rating',
-                'pl_update',
-                'pl_change',
-                'opponent',
-                'op_rating',
-                'op_update',
-                'op_change',
-                'winner',
-            ]);
+        return $this->trial->results()->with('record')->get()->map(function ($result) {
+            return [
+                str_replace(' 00:00:00', '', $result['date']),
+                $result['player'],
+                $result['pl_rating'],
+                $result['pl_update'],
+                $result['pl_change'],
+                $result['opponent'],
+                $result['op_rating'],
+                $result['op_update'],
+                $result['op_change'],
+                $result['winner'],
+                $result['record']['match'],
+                $result['record']['group'],
+                $result['record']['round'],
+            ];
         });
     }
 
@@ -49,6 +52,9 @@ class ChronoExport implements FromCollection, WithHeadings
            'Op Update',
            'Op Change',
            'Winner',
+           'Match',
+           'Group',
+           'Round',
         ];
     }
 }
